@@ -14,7 +14,8 @@ class PostsController extends Controller
      */
     public function index()
     {
-        $posts = Post::all();
+       // $posts = Post::all();
+        $posts = Post::paginate(3);
         return view('posts.index', compact('posts'));
     }
 
@@ -25,7 +26,9 @@ class PostsController extends Controller
      */
     public function create()
     {
-        
+      //  $posts = Post::all();
+      // return view('posts.create',compact('posts')) ;
+      return view('posts.create');
     }
 
     /**
@@ -36,19 +39,22 @@ class PostsController extends Controller
      */
     public function store(Request $request)
     {
-        dd('dddd');
+      
       //  $request=Post::all()
-        // return request()->all();
+       //  return request()->all();
       //  $request = new Posts;
-        //$post = new Posts;
-       // $post->title = request('title');
-        //$post->description = request('description');
-        //$post->image = request('image');
+        $post = new Post;
+        $post->title = request('title');
+        $post->description = request('description');
+        $post->image = request('image');
         //$post->user_id = request('user_id');
-        //$post->user_id = $user->id;
+        $post->user_id = 1;//Autch()->id;
 
-       //$post->save();
-       return wives('posts', compact('request'));
+      // $post->save();
+       return redirect('posts');
+      // return view('posts/create', compact('request'));
+      //return request()->all();
+      
     }
 
     /**

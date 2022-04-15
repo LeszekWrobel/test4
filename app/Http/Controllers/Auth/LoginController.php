@@ -39,12 +39,23 @@ class LoginController extends Controller
         $this->middleware('guest')->except('logout');
         //$this->middleware('guest')->except('logout')->redirect()->route('login');
        //return redirect('/home');
+        
     }
-    /*
+  /*
     public function logout()
     {
          $posts = Post::all();
         return view('posts.index', compact('posts'));
+       return view('welcome');
     }
-    */
+  */ 
+
+  /*
+    public function login()
+    {
+        $posts = Post::all();
+        return view('posts.userPosts', compact('posts'));
+       
+    }
+  */
 }
