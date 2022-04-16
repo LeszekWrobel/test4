@@ -14,27 +14,31 @@
                 <div class="card-body">
                    
                         @foreach($posts as $post)
-                        
-                            <ul>
-                                <li>{{$post}}</li>
-                                <li>Tytuł ogłoszenia : {{$post->title}}</li>
-                                <li>Opis : {{$post->description}}</li>
-                                <li>Dodano dnia : {{$post->created_at}}</li>
-                            </ul>
+
+                        <div class="card mb-3" style="">
+                          <div class="row g-0">
+                            <div class="col-md-4">
+                               <img src="{{$post->image}}" class="img-thumbnail" alt="...">
+                            </div>
+                            <div class="col-md-8">
+                              <div class="card-body">
+                                <h5 class="card-title">{{$post->title}}</h5>
+                                <p class="card-text">{{$post->description}}</p>
+                                <p class="card-text"><small class="text-muted">Dodano : {{$post->updated_at}}</small></p>
+                                <p class="card-text"><small class="text-muted">Ostatnia aktualizacja : {{$post->created_at}}</small></p>
+                                <a href="#" class="stretched-link">Go somewhere</a>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
                         @endforeach
 
-
-                          <nav aria-label="Page navigation example">
-                          <ul class="pagination justify-content-center">
-                            <li class="page-item disabled">
-                              <a class="page-link">Previous</a>
-                            </li>
-                            {{ $posts->links() }}
-                            <li class="page-item">
-                              <a class="page-link" href="#">Next</a>
-                            </li>
+                        <nav aria-label="Page navigation example">
+                          <ul class="pagination justify-content-center">                         
+                                {{ $posts->links() }}
                           </ul>
-                        </nav>         
+                        </nav>      
                 </div>
             </div>
         </div>

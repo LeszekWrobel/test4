@@ -14,7 +14,8 @@ class PostsController extends Controller
      */
     public function index()
     {
-       // $posts = Post::all();
+       // $posts = Post::all();  $posts = Post::orderBy('column', 'DESC');
+       //$posts = Post::orderBy('id', 'DESC');
         $posts = Post::paginate(3);
         return view('posts.index', compact('posts'));
     }
@@ -50,7 +51,7 @@ class PostsController extends Controller
         //$post->user_id = request('user_id');
         $post->user_id = 1;//Autch()->id;
 
-      // $post->save();
+       $post->save();
        return redirect('posts');
       // return view('posts/create', compact('request'));
       //return request()->all();
