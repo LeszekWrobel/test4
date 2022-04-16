@@ -22,7 +22,8 @@
                             </div>
                             <div class="col-md-8">
                               <div class="card-body">
-                                <h5 class="card-title">{{$post->title}}</h5>
+                                <h3 class="card-title">{{$post->title}}</h3>
+                                
                                 <p class="card-text">{{$post->description}}</p>
                                 <p class="card-text"><small class="text-muted">Dodano : {{$post->updated_at}}</small></p>
                                 <p class="card-text"><small class="text-muted">Ostatnia aktualizacja : {{$post->created_at}}</small></p>

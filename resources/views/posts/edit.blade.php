@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header"><h1>Dodaj ogłoszenie CREATE</h1></div>
+                <div class="card-header"><h1>Edycja ogłoszenia</h1></div>
 
                 <div class="card-body">
                     @if (session('status'))
@@ -13,13 +13,14 @@
                             {{ session('status') }}
                         </div>
                     @endif
-                        <form class="row m-3" method="POST" action="/posts" enctype="multipart-data">
-                        {{csrf_field()}}
+                        <form class="row m-3" method="POST" action="/posts/{{$post->id}}" enctype="multipart-data">
+                            @method('PATCH')
+                            @csrf                     
 
                             <div class="form-group row">
                                 <label for="title" class="col-md-4 col-form-label">Tytuł</label>
 
-                                <input id="title" type="text"
+                                <input id="title" type="text" value="{{$post->title}}"
                                 class="form-control{{ $errors->has('title') ? ' is-invalid' : ''}}" name="title" required>
 
                                 @if ($errors->has('title'))
@@ -32,7 +33,7 @@
                             <div class="form-group row">
                                 <label for="textarea" class="col-md-4 col-form-label">Opis</label>
 
-                                <textarea class="form-control" name="description" id="floatingTextarea2" style="height: 100px"  required></textarea>
+                                <textarea class="form-control" name="description" id="floatingTextarea2" style="height: 100px"  required>{{$post->description}}" </textarea>
   
                                 <input type="hidden" name="user_id" value="">
 
@@ -43,13 +44,13 @@
                                 @endif
                             </div>
 
-                            <div class="form-group row g-3">
-                                <label form="image">Dodaj zdjęcie</label>
-                                <input type="file" id="image" name="image">
-                            </div>
-
-                            <div class="g-3">
-                                <button class="btn btn-primary" type="submmit">Dodaj</button>
+                            <div class="g-3 d-grid gap-2 d-md-block">
+                              <button class="btn btn-primary" type="submmit">Zapisz zmiany</button>
+                                <form method="POST" action="posts/{{$post->id}}">
+                                @method('DELETE')
+                                @csrf
+                                    <button class="btn btn-danger" type="submmit">Usuń ogłoszenie</button>
+                                <form>
                             </div>
                         </form>
 

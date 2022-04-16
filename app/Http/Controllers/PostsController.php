@@ -40,22 +40,14 @@ class PostsController extends Controller
      */
     public function store(Request $request)
     {
-      
-      //  $request=Post::all()
-       //  return request()->all();
-      //  $request = new Posts;
         $post = new Post;
         $post->title = request('title');
         $post->description = request('description');
         $post->image = request('image');
-        //$post->user_id = request('user_id');
         $post->user_id = 1;//Autch()->id;
 
        $post->save();
        return redirect('posts');
-      // return view('posts/create', compact('request'));
-      //return request()->all();
-      
     }
 
     /**
@@ -66,7 +58,9 @@ class PostsController extends Controller
      */
     public function show($id)
     {
-        //
+         $post = Post::find($id);
+
+        return view('posts.show', compact('post'));
     }
 
     /**
@@ -77,7 +71,9 @@ class PostsController extends Controller
      */
     public function edit($id)
     {
-        //
+        //return view('posts.edit');
+        $post = Post::find($id);
+        return view('posts.edit', compact('post')); 
     }
 
     /**
@@ -89,7 +85,13 @@ class PostsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $post = Post::find($id);
+        $post->title = request('title');
+        $post->description = request('description');
+        $post->image = request('image');
+        $post->user_id = 1;//Autch()->id;
+        $post->save();
+        return redirect('posts');
     }
 
     /**
@@ -100,6 +102,7 @@ class PostsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Post::find($id)->delete();
+        return redirect('posts');
     }
 }
