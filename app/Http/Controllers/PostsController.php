@@ -7,6 +7,12 @@ use App\Models\Post;
 
 class PostsController extends Controller
 {
+    /*
+    public function __construct()
+    {
+        $this->middlewere('auth');
+    }
+    */
     /**
      * Display a listing of the resource.
      *
@@ -17,6 +23,7 @@ class PostsController extends Controller
        // $posts = Post::all();  $posts = Post::orderBy('column', 'DESC');
        //$posts = Post::orderBy('id', 'DESC');
         $posts = Post::paginate(3);
+     //   $posts = Post::where('user_id', auth()->id()->get());
         return view('posts.index', compact('posts'));
     }
 
@@ -40,6 +47,18 @@ class PostsController extends Controller
      */
     public function store(Request $request)
     {
+/*        $attributes =  request()->validate([
+            'title' => ['required', 'min:3'],
+            'description' => 'required'
+        ]);
+        
+*/
+        request()->validate([
+            'title' => ['required', 'min:3'],
+            'description' => 'required'
+          ]); 
+
+/*
         $post = new Post;
         $post->title = request('title');
         $post->description = request('description');
@@ -47,7 +66,13 @@ class PostsController extends Controller
         $post->user_id = 1;//Autch()->id;
 
        $post->save();
-       return redirect('posts');
+*/
+/**/
+       Post::create(request(['title','description','image','user_id']));
+       return redirect('posts');//->with('message', 'Your data updated successfully');
+
+       // Post::create($attributes + ['user_id'=>auth()->id()]);
+       return redirect('/posts');
     }
 
     /**
@@ -56,9 +81,10 @@ class PostsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+      public function show(Post $post)
+   // public function show($id)
     {
-         $post = Post::find($id);
+      //   $post = Post::find($id);
 
         return view('posts.show', compact('post'));
     }
@@ -69,10 +95,10 @@ class PostsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+     public function edit(Post $post)
+   // public function edit($id)
     {
-        //return view('posts.edit');
-        $post = Post::find($id);
+       // $post = Post::find($id);
         return view('posts.edit', compact('post')); 
     }
 
@@ -91,6 +117,8 @@ class PostsController extends Controller
         $post->image = request('image');
         $post->user_id = 1;//Autch()->id;
         $post->save();
+
+        //$post->update(request(['title','description','image','user_id']));
         return redirect('posts');
     }
 
@@ -100,9 +128,11 @@ class PostsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+     public function destroy(Post $post)
+    //public function destroy($id)
     {
-        Post::find($id)->delete();
+        //Post::find($id)->delete();
+        $post->delete();
         return redirect('posts');
     }
 }

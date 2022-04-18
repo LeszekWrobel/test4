@@ -13,6 +13,7 @@
                             {{ session('status') }}
                         </div>
                     @endif
+                    
                         <form class="row m-3" method="POST" action="/posts/{{$post->id}}" enctype="multipart-data">
                             @method('PATCH')
                             @csrf                     
@@ -45,14 +46,16 @@
                             </div>
 
                             <div class="g-3 d-grid gap-2 d-md-block">
-                              <button class="btn btn-primary" type="submmit">Zapisz zmiany</button>
-                                <form method="POST" action="posts/{{$post->id}}">
+                              <button class="btn-sm btn-primary" type="submmit">Zapisz zmiany</button>
+                                
+                            
+                        </form>
+                        <form method="POST" action="/posts/{{$post->id}}">
                                 @method('DELETE')
                                 @csrf
-                                    <button class="btn btn-danger" type="submmit">Usuń ogłoszenie</button>
-                                <form>
-                            </div>
+                                    <button class="btn-sm btn-danger" type="submmit">Usuń ogłoszenie</button>
                         </form>
+                    
 
                 
             </div>

@@ -20,7 +20,7 @@
                                 <label for="title" class="col-md-4 col-form-label">Tytuł</label>
 
                                 <input id="title" type="text"
-                                class="form-control{{ $errors->has('title') ? ' is-invalid' : ''}}" name="title" required>
+                                class="form-control{{ $errors->has('title') ? ' is-invalid' : ''}}" name="title" value="{{old('title')}}">
 
                                 @if ($errors->has('title'))
                                     <span class="invalid-feedback" role="alert">
@@ -32,7 +32,7 @@
                             <div class="form-group row">
                                 <label for="textarea" class="col-md-4 col-form-label">Opis</label>
 
-                                <textarea class="form-control" name="description" id="floatingTextarea2" style="height: 100px"  required></textarea>
+                                <textarea class="form-control{{ $errors->has('description') ? ' is-invalid' : ''}}" name="description" id="floatingTextarea2" style="height: 100px">{{old('description')}}</textarea>
   
                                 <input type="hidden" name="user_id" value="">
 
@@ -52,6 +52,7 @@
                                 <button class="btn btn-primary" type="submmit">Dodaj</button>
                             </div>
                         </form>
+                @include ('inc/messages')
 
                 
             </div>
